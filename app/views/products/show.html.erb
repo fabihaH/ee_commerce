@@ -4,6 +4,9 @@
   <b>Name:</b>
   <%= @product.name %>
 </p>
+<p>
+<%= image_tag @product.attachments.first.photo.url(:medium) if @product.attachments.present? %>
+</p>
 
 <p>
   <b>Title:</b>
