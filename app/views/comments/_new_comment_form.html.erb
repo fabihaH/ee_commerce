@@ -1,0 +1,9 @@
+<%= form_for [@product, @comment] do |f| %>
+  <div class="fields">
+    <%= f.label :comments %>
+    <%= f.text_field :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

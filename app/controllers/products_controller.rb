@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :authenticate_user!
+  before_filter :set_product, except: [:index, :new, :create]
   # GET /products
   # GET /products.json
+  before_filter :set_product, only: [:create]
   def index
     @products = Product.all
 
@@ -14,7 +16,9 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @comment = Comment.new
     @product = Product.find(params[:id])
+     @comments = @product.comments
 
     respond_to do |format|
       format.html # show.html.erb
@@ -80,5 +84,12 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
+  end
+  private
+  def set_product
+   @product = Product.find(params[:id])
+  end
+  def set_product
+    @product = Product.find(params[:product_id])
   end
 end
